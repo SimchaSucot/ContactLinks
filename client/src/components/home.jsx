@@ -2,7 +2,8 @@
 
 import React, { useState } from 'react';
 import Welcome from './Welcome';
-import WhatsappGenerator from './WhatsappGenerator';
+// import WhatsappGenerator from './WhatsappGenerator';
+import WhatsappLinkGenerator from './WhatsappLinkGenerator';
 
 const Home = () => {
   const [activeButton, setActiveButton] = useState(null);
@@ -26,7 +27,7 @@ const Home = () => {
             {[
               { text: 'ראשי', component: 'welcome' },
               { text: 'מחולל אימייל', component: 'emailGenerator' },
-              { text: 'מחולל וואצאפ', component: 'whatsappGenerator' },
+              { text: 'קישור וואצאפ', component: 'whatsappLinkGenerator' },
               { text: 'מחולל טלפון', component: 'phoneGenerator' },
               { text: 'תפוצה חכמה באימייל/וואצאפ', component: 'smartDistribution' },
               { text: 'כפתור 6', component: 'button6' },
@@ -51,7 +52,7 @@ const Home = () => {
       </header>
       <main className="container mx-auto px-4 py-8">
         {activeComponent === 'welcome' && <Welcome />}
-        {activeComponent === 'whatsappGenerator' && <WhatsappGenerator />}
+        {activeComponent === 'whatsappLinkGenerator' && <WhatsappLinkGenerator />}
         {/* הוסף עוד תנאים עבור הקומפוננטות הנוספות */}
       </main>
     </div>
