@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Welcome from './Welcome';
 // import WhatsappGenerator from './WhatsappGenerator';
 import WhatsappLinkGenerator from './WhatsappLinkGenerator';
+import EmailLinkGenerator from './EmailLinkGenerator';
 
 const Home = () => {
   const [activeButton, setActiveButton] = useState(null);
@@ -26,7 +27,7 @@ const Home = () => {
           <nav className="flex flex-1 justify-center flex-row-reverse space-x-reverse space-x-6">
             {[
               { text: 'ראשי', component: 'welcome' },
-              { text: 'מחולל אימייל', component: 'emailGenerator' },
+              { text: 'מחולל אימייל', component: 'emailLinkGenerator' },
               { text: 'קישור וואצאפ', component: 'whatsappLinkGenerator' },
               { text: 'מחולל טלפון', component: 'phoneGenerator' },
               { text: 'תפוצה חכמה באימייל/וואצאפ', component: 'smartDistribution' },
@@ -53,6 +54,7 @@ const Home = () => {
       <main className="container mx-auto px-4 py-8">
         {activeComponent === 'welcome' && <Welcome />}
         {activeComponent === 'whatsappLinkGenerator' && <WhatsappLinkGenerator />}
+        {activeComponent === 'emailLinkGenerator' && <EmailLinkGenerator />}
         {/* הוסף עוד תנאים עבור הקומפוננטות הנוספות */}
       </main>
     </div>
