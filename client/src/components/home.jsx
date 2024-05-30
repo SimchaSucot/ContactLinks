@@ -1,20 +1,7 @@
-// Home.jsx
-
-import React, { useState } from 'react';
-import Welcome from './Welcome';
-import EmailLinkGenerator from './EmailLinkGenerator';
-import WhatsappLinkGenerator from './WhatsappLinkGenerator';
-import PhoneLinkGenerator from './PhoneLinkGenerator';
+import React from 'react';
+import { Outlet, Link } from 'react-router-dom';
 
 const Home = () => {
-  const [activeButton, setActiveButton] = useState(null);
-  const [activeComponent, setActiveComponent] = useState('welcome');
-
-  const handleButtonClick = (componentName, index) => {
-    setActiveButton(index);
-    setActiveComponent(componentName);
-  };
-
   return (
     <div className="min-h-screen bg-gray-100">
       <header className="bg-white shadow">
@@ -26,23 +13,18 @@ const Home = () => {
           </div>
           <nav className="flex flex-1 justify-center flex-row-reverse space-x-reverse space-x-6">
             {[
-              { text: 'ראשי', component: 'welcome' },
-              { text: 'קישור לאימייל', component: 'emailLinkGenerator' },
-              { text: 'קישור לוואצאפ', component: 'whatsappLinkGenerator' },
-              { text: 'קישור לטלפון', component: 'phoneLinkGenerator' },
-            //   { text: 'תפוצה חכמה באימייל/וואצאפ', component: 'smartDistribution' },
-            //   { text: 'כפתור 6', component: 'button6' },
+              { text: 'ראשי', path: '/' },
+              { text: 'קישור לאימייל', path: '/email-link' },
+              { text: 'קישור לוואצאפ', path: '/whatsapp-link' },
+              { text: 'קישור לטלפון', path: '/phone-link' },
             ].map((item, index) => (
-              <a
+              <Link
                 key={index}
-                href="#!"
-                onClick={() => handleButtonClick(item.component, index)}
-                className={`text-gray-700 px-3 py-2 rounded-md text-sm font-medium transition duration-300 ${
-                  activeButton === index ? 'bg-blue-500 text-white' : 'hover:bg-blue-500 hover:text-white'
-                }`}
+                to={item.path}
+                className="text-gray-700 px-3 py-2 rounded-md text-sm font-medium transition duration-300 hover:bg-blue-500 hover:text-white"
               >
                 {item.text}
-              </a>
+              </Link>
             ))}
           </nav>
           <div className="flex items-center">
@@ -52,11 +34,7 @@ const Home = () => {
         </div>
       </header>
       <main className="container mx-auto px-4 py-8">
-        {activeComponent === 'welcome' && <Welcome />}
-        {activeComponent === 'emailLinkGenerator' && <EmailLinkGenerator />}
-        {activeComponent === 'whatsappLinkGenerator' && <WhatsappLinkGenerator />}
-        {activeComponent === 'phoneLinkGenerator' && <PhoneLinkGenerator />}
-        {/* הוסף עוד תנאים עבור הקומפוננטות הנוספות */}
+        <Outlet />
       </main>
     </div>
   );
