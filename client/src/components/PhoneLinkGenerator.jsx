@@ -85,7 +85,7 @@ const PhoneLinkGenerator = () => {
             <strong>לחצו על קבלת קישור</strong>
           </p>
           <ul className="list-none mb-2 text-right">
-            <li>לחצו על הכפתור "קבלת קישור"</li>
+            <li>לחצו על הכפתור קבלת קישור</li>
             <li>אם הכל בסדר, ייווצר קישור טלפון שיופיע מתחת לכפתור</li>
           </ul>
           <p className="mb-2">

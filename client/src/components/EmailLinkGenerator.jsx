@@ -106,7 +106,6 @@ const EmailLinkGenerator = () => {
           </p>
           <ul className="list-none mb-2 text-right">
             <li>בשדה הראשון, רשמו את כתובת האימייל שאליה אתם רוצים לשלוח את ההודעה</li>
-            <li>לדוגמה: someone@example.com</li>
           </ul>
           <p className="mb-2">
             <strong>כתבו את נושא ההודעה</strong>
@@ -124,7 +123,7 @@ const EmailLinkGenerator = () => {
             <strong>לחצו על קבלת קישור</strong>
           </p>
           <ul className="list-none mb-2 text-right">
-            <li>לחצו על הכפתור "קבלת קישור"</li>
+            <li>לחצו על הכפתור קבלת קישור</li>
             <li>אם הכל בסדר, ייווצר קישור לאימייל שיופיע מתחת לכפתור</li>
           </ul>
           <p className="mb-2">
