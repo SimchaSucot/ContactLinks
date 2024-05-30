@@ -2,9 +2,8 @@
 
 import React, { useState } from 'react';
 import Welcome from './Welcome';
-// import WhatsappGenerator from './WhatsappGenerator';
-import WhatsappLinkGenerator from './WhatsappLinkGenerator';
 import EmailLinkGenerator from './EmailLinkGenerator';
+import WhatsappLinkGenerator from './WhatsappLinkGenerator';
 import PhoneLinkGenerator from './PhoneLinkGenerator';
 
 const Home = () => {
@@ -22,7 +21,7 @@ const Home = () => {
         <div className="container mx-auto px-4 py-4 flex justify-between items-center flex-row-reverse">
           <div className="flex items-center">
             <div className="mr-6">
-              <img src="path_to_logo.png" alt="Logo" className="h-10" />
+              <img src="/logo/logo_contactLinks_4.webp" alt="Logo" className="h-12" />
             </div>
           </div>
           <nav className="flex flex-1 justify-center flex-row-reverse space-x-reverse space-x-6">
@@ -31,8 +30,8 @@ const Home = () => {
               { text: 'קישור לאימייל', component: 'emailLinkGenerator' },
               { text: 'קישור לוואצאפ', component: 'whatsappLinkGenerator' },
               { text: 'קישור לטלפון', component: 'phoneLinkGenerator' },
-              { text: 'תפוצה חכמה באימייל/וואצאפ', component: 'smartDistribution' },
-              { text: 'כפתור 6', component: 'button6' },
+            //   { text: 'תפוצה חכמה באימייל/וואצאפ', component: 'smartDistribution' },
+            //   { text: 'כפתור 6', component: 'button6' },
             ].map((item, index) => (
               <a
                 key={index}
@@ -54,8 +53,8 @@ const Home = () => {
       </header>
       <main className="container mx-auto px-4 py-8">
         {activeComponent === 'welcome' && <Welcome />}
-        {activeComponent === 'whatsappLinkGenerator' && <WhatsappLinkGenerator />}
         {activeComponent === 'emailLinkGenerator' && <EmailLinkGenerator />}
+        {activeComponent === 'whatsappLinkGenerator' && <WhatsappLinkGenerator />}
         {activeComponent === 'phoneLinkGenerator' && <PhoneLinkGenerator />}
         {/* הוסף עוד תנאים עבור הקומפוננטות הנוספות */}
       </main>
