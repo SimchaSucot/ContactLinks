@@ -7,7 +7,7 @@ const Welcome = () => {
   return (
     <div className="bg-blue-50 text-blue-900 leading-relaxed flex items-center justify-center min-h-screen relative m-0 p-0">
       <div className="absolute inset-0 bg-logo bg-cover bg-center"></div>
-      <div className="relative max-w-4xl mx-auto p-4 text-center mt-0" style={{ marginTop: '0cm' }}>
+      <div className="relative max-w-4xl mx-auto p-4 text-center mt-0" style={{ marginTop: '1cm' }}>
         <h1 className="text-4xl md:text-6xl font-bold fade-in">ברוכים הבאים ל</h1>
         <h1 className="text-4xl md:text-6xl font-bold fade-in">Contact Links</h1>
         <p className="mt-4 text-xl md:text-2xl scroll-text">
