@@ -1,8 +1,13 @@
+// Home.jsx
 import React, { useState } from 'react';
 import { Outlet, Link } from 'react-router-dom';
+import LoginModal from './LoginModal';
+import SignupModal from './SignupModal';
 
 const Home = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -10,6 +15,23 @@ const Home = () => {
 
   const closeMenu = () => {
     setIsMenuOpen(false);
+  };
+
+  const openLoginModal = () => {
+    setIsLoginModalOpen(true);
+  };
+
+  const closeLoginModal = () => {
+    setIsLoginModalOpen(false);
+  };
+
+  const openSignupModal = () => {
+    setIsSignupModalOpen(true);
+    setIsLoginModalOpen(false);
+  };
+
+  const closeSignupModal = () => {
+    setIsSignupModalOpen(false);
   };
 
   return (
@@ -57,9 +79,19 @@ const Home = () => {
               ></path>
             </svg>
           </button>
-          <div className="hidden md:flex items-center">
-            <a href="#login" className="text-gray-700 hover:text-gray-900 ml-4 px-3 py-2 rounded-md text-sm font-medium">התחבר</a>
-            <a href="#signup" className="text-gray-700 hover:text-gray-900 ml-4 px-3 py-2 rounded-md text-sm font-medium">הרשמה</a>
+          <div className="hidden md:flex items-center flex-row-reverse">
+            <button
+              onClick={openLoginModal}
+              className="bg-pink-500 text-white hover:bg-pink-700 ml-4 px-3 py-2 rounded-md text-sm font-medium"
+            >
+              כניסה
+            </button>
+            <button
+              onClick={openSignupModal}
+              className="border border-pink-500 text-pink-500 hover:bg-pink-500 hover:text-white ml-4 px-3 py-2 rounded-md text-sm font-medium"
+            >
+              הצטרפות
+            </button>
           </div>
         </div>
         {isMenuOpen && (
@@ -81,8 +113,18 @@ const Home = () => {
                 </Link>
               ))}
               <div className="flex flex-col mt-4">
-                <a href="#login" className="text-gray-700 hover:text-gray-900 mb-2 px-3 py-2 rounded-md text-sm font-medium">התחבר</a>
-                <a href="#signup" className="text-gray-700 hover:text-gray-900 px-3 py-2 rounded-md text-sm font-medium">הרשמה</a>
+                <button
+                  onClick={openLoginModal}
+                  className="bg-pink-500 text-white hover:bg-pink-700 mb-2 px-3 py-2 rounded-md text-sm font-medium"
+                >
+                  כניסה
+                </button>
+                <button
+                  onClick={openSignupModal}
+                  className="border border-pink-500 text-pink-500 hover:bg-pink-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                >
+                  הצטרפות
+                </button>
               </div>
             </div>
           </nav>
@@ -91,6 +133,8 @@ const Home = () => {
       <main className="container mx-auto px-4 py-8">
         <Outlet />
       </main>
+      {isLoginModalOpen && <LoginModal onClose={closeLoginModal} openSignupModal={openSignupModal} />}
+      {isSignupModalOpen && <SignupModal onClose={closeSignupModal} />}
     </div>
   );
 };
