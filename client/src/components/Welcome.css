@@ -1,35 +1,67 @@
-body {
-    margin: 0;
-    padding: 0;
+/* Welcome.css */
+.bg-logo {
+  background-image: url('/path/to/your/logo/image.jpg');
+}
+
+.fade-in {
+  animation: fadeIn 2s ease-in forwards;
+}
+
+.scroll-text {
+  animation: scrollText 5s linear infinite;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
-  
-  .fade-in {
-    animation: fadeIn 3s ease-in-out;
+  to {
+    opacity: 1;
   }
-  
-  @keyframes fadeIn {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
+}
+
+.floating-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.menu-button {
+  padding: 0.5rem 1rem;
+  background-color: #fff;
+  color: #1a202c;
+  border: 2px solid #1a202c;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  transition: transform 0.3s, opacity 0.3s;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.menu-button:hover {
+  background-color: #1a202c;
+  color: #fff;
+}
+
+.menu-button.fade-in-delay:nth-child(1) {
+  animation: fadeInButtons 2s 0.5s forwards;
+}
+
+.menu-button.fade-in-delay:nth-child(2) {
+  animation: fadeInButtons 2s 1s forwards;
+}
+
+.menu-button.fade-in-delay:nth-child(3) {
+  animation: fadeInButtons 2s 1.5s forwards;
+}
+
+.menu-button.fade-in-delay:nth-child(4) {
+  animation: fadeInButtons 2s 2s forwards;
+}
+
+@keyframes fadeInButtons {
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  
-  .scroll-text {
-    animation: scrollIn 2s ease-in-out;
-  }
-  
-  @keyframes scrollIn {
-    0% { transform: translateY(100px); opacity: 0; }
-    100% { transform: translateY(0); opacity: 1; }
-  }
-  
-  .bg-logo {
-    background: url('https://github.com/SimchaSucot/ContactLinks/blob/main/path-to-logo-4.png') no-repeat center center;
-    background-size: cover;
-    opacity: 0.1; /* Low opacity for visibility */
-    z-index: -1;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-  
+}
