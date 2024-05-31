@@ -1,6 +1,7 @@
 /* Welcome.css */
 .bg-logo {
-  background-image: url('/path/to/your/logo/image.jpg');
+  background-image: url('/logo/logo_contactLinks_4.webp');
+  opacity: 0.07;
 }
 
 .fade-in {

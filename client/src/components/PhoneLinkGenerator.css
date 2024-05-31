@@ -1,0 +1,105 @@
+/* PhoneLinkGenerator.css */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+  }
+  
+  .phone-link-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+  }
+  
+  .phone-link-content, .phone-link-instructions {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 45%;
+  }
+  
+  .phone-link-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #1a202c;
+    margin-bottom: 1rem;
+  }
+  
+  .phone-link-instructions-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #0a3d62;
+    margin-bottom: 1rem;
+  }
+  
+  .phone-link-input-group, .phone-link-input, .phone-link-generate-button, .phone-link-instructions-text, .phone-link-instructions-list {
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+  }
+  
+  .phone-link-input-group {
+    animation-delay: 0.5s;
+  }
+  
+  .phone-link-input {
+    animation-delay: 1s;
+  }
+  
+  .phone-link-generate-button {
+    animation-delay: 1.5s;
+  }
+  
+  .phone-link-instructions-title {
+    animation-delay: 0.5s;
+  }
+  
+  .phone-link-instructions-text, .phone-link-instructions-list {
+    animation-delay: 0.75s;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeInFast {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate-fade-in-fast {
+    animation: fadeInFast 0.75s forwards;
+  }
+  
+  .typing-animation {
+    animation: typing 2s steps(30, end) forwards, none;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 0.15em solid #000;
+  }
+  
+  @keyframes typing {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+  
