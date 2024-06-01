@@ -12,7 +12,8 @@ html {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 2rem;
+  gap: 1rem;
+  padding: 1rem;
 }
 
 .whatsapp-link-content,
@@ -21,8 +22,21 @@ html {
   padding: 2rem;
   border-radius: 0.5rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  width: 45%;
+  width: 100%; /* ברירת מחדל - תופס 100% רוחב במסכים קטנים */
 }
+
+@media (min-width: 768px) {
+  .whatsapp-link-content{
+    gap: 2rem;
+    padding: 2rem;
+  }
+  .whatsapp-link-content,
+  .whatsapp-link-instructions {
+    padding: 2rem;
+    width: 45%; /* במסכים גדולים יותר, תופס 45% רוחב */
+  }
+}
+
 
 .whatsapp-link-title {
   font-size: 2rem;
