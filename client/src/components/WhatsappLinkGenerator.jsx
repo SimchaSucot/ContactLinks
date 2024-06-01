@@ -90,7 +90,7 @@ const WhatsappLinkGenerator = () => {
                 className="whatsapp-link-copy-button bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500"
               >
                 העתקה
-              </button> 
+              </button>
             )}
           </div>
         )}
