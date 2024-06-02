@@ -29,7 +29,7 @@ body, html {
       padding: 2rem;
     }
     .email-link-content,
-    .phone-link-instructions {
+    .email-link-instructions {
       padding: 2rem;
       width: 45%; /* במסכים גדולים יותר, תופס 45% רוחב */
     }
