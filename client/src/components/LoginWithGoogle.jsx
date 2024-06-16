@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const LoginWithGoogle = ({ onClose }) => {
   const handleGoogleLogin = () => {
@@ -6,9 +6,22 @@ const LoginWithGoogle = ({ onClose }) => {
     console.log('Google login button clicked');
   };
 
+  useEffect(() => {
+    const handleOutsideClick = (event) => {
+      if (event.target.id === 'modal-background') {
+        onClose();
+      }
+    };
+
+    document.addEventListener('mousedown', handleOutsideClick);
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+    };
+  }, [onClose]);
+
   return (
-    <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
-      <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+    <div id="modal-background" className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
+      <div className="relative bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
         <h2 className="text-2xl font-semibold mb-4 text-center">התחברות עם גוגל</h2>
         <div className="flex flex-col items-center">
           <button
