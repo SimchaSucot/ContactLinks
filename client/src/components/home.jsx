@@ -1,6 +1,6 @@
-// Home.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Outlet, Link } from 'react-router-dom';
+import { getAuth, signOut } from 'firebase/auth';
 import LoginModal from './LoginModal';
 import SignupModal from './SignupModal';
 
@@ -8,6 +8,21 @@ const Home = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
   const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const auth = getAuth();
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setUser(user);
+      if (user) {
+        console.log('User is signed in:', user);
+        console.log('Profile Picture URL:', user.photoURL);
+      } else {
+        console.log('No user is signed in');
+      }
+    });
+    return () => unsubscribe();
+  }, []);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -32,6 +47,16 @@ const Home = () => {
 
   const closeSignupModal = () => {
     setIsSignupModalOpen(false);
+  };
+
+  const handleLogout = () => {
+    const auth = getAuth();
+    signOut(auth).then(() => {
+      setUser(null);
+      console.log('User signed out');
+    }).catch((error) => {
+      console.error('Error signing out:', error);
+    });
   };
 
   return (
@@ -80,18 +105,35 @@ const Home = () => {
             </svg>
           </button>
           <div className="hidden md:flex items-center flex-row-reverse">
-            <button
-              onClick={openLoginModal}
-              className="bg-pink-500 text-white hover:bg-pink-700 ml-4 px-3 py-2 rounded-md text-sm font-medium"
-            >
-              כניסה
-            </button>
-            <button
-              onClick={openSignupModal}
-              className="border border-pink-500 text-pink-500 hover:bg-pink-500 hover:text-white ml-4 px-3 py-2 rounded-md text-sm font-medium"
-            >
-              הצטרפות
-            </button>
+            {user ? (
+              <>
+                <img src={user.photoURL || 'default-profile.png'} alt="Profile" className="h-8 w-8 rounded-full mr-2" onError={(e) => e.target.src = 'default-profile.png'} />
+                <span className="text-gray-700 ml-4 px-3 py-2 rounded-md text-sm font-medium">
+                  שלום, {user.displayName}
+                </span>
+                <button
+                  onClick={handleLogout}
+                  className="bg-red-500 text-white hover:bg-red-700 ml-4 px-3 py-2 rounded-md text-sm font-medium"
+                >
+                  התנתקות
+                </button>
+              </>
+            ) : (
+              <>
+                <button
+                  onClick={openLoginModal}
+                  className="bg-pink-500 text-white hover:bg-pink-700 ml-4 px-3 py-2 rounded-md text-sm font-medium"
+                >
+                  כניסה
+                </button>
+                <button
+                  onClick={openSignupModal}
+                  className="border border-pink-500 text-pink-500 hover:bg-pink-500 hover:text-white ml-4 px-3 py-2 rounded-md text-sm font-medium"
+                >
+                  הצטרפות
+                </button>
+              </>
+            )}
           </div>
         </div>
         {isMenuOpen && (
@@ -113,18 +155,35 @@ const Home = () => {
                 </Link>
               ))}
               <div className="flex flex-col mt-4">
-                <button
-                  onClick={openLoginModal}
-                  className="bg-pink-500 text-white hover:bg-pink-700 mb-2 px-3 py-2 rounded-md text-sm font-medium"
-                >
-                  כניסה
-                </button>
-                <button
-                  onClick={openSignupModal}
-                  className="border border-pink-500 text-pink-500 hover:bg-pink-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
-                >
-                  הצטרפות
-                </button>
+                {user ? (
+                  <>
+                    <img src={user.photoURL || 'default-profile.png'} alt="Profile" className="h-8 w-8 rounded-full mb-2" onError={(e) => e.target.src = 'default-profile.png'} />
+                    <span className="text-gray-700 mb-2 px-3 py-2 rounded-md text-sm font-medium">
+                      שלום, {user.displayName}
+                    </span>
+                    <button
+                      onClick={handleLogout}
+                      className="bg-red-500 text-white hover:bg-red-700 mb-2 px-3 py-2 rounded-md text-sm font-medium"
+                    >
+                      התנתקות
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <button
+                      onClick={openLoginModal}
+                      className="bg-pink-500 text-white hover:bg-pink-700 mb-2 px-3 py-2 rounded-md text-sm font-medium"
+                    >
+                      כניסה
+                    </button>
+                    <button
+                      onClick={openSignupModal}
+                      className="border border-pink-500 text-pink-500 hover:bg-pink-500 hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+                    >
+                      הצטרפות
+                    </button>
+                  </>
+                )}
               </div>
             </div>
           </nav>
