@@ -109,7 +109,7 @@ const Home = () => {
               <img
                 src={user.photoURL || 'default-profile.png'}
                 alt="Profile"
-                className="h-8 w-8 rounded-full"
+                className="h-8 w-8 rounded-full md:hidden"
                 onError={(e) => e.target.src = 'default-profile.png'}
               />
             )}
