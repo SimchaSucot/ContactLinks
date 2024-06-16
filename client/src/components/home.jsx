@@ -85,25 +85,35 @@ const Home = () => {
               </Link>
             ))}
           </nav>
-          <button
-            className="md:hidden text-gray-700 focus:outline-none"
-            onClick={toggleMenu}
-          >
-            <svg
-              className="h-6 w-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
+          <div className="flex items-center">
+            <button
+              className="md:hidden text-gray-700 focus:outline-none mr-2"
+              onClick={toggleMenu}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16m-7 6h7"
-              ></path>
-            </svg>
-          </button>
+              <svg
+                className="h-6 w-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h16m-7 6h7"
+                ></path>
+              </svg>
+            </button>
+            {user && (
+              <img
+                src={user.photoURL || 'default-profile.png'}
+                alt="Profile"
+                className="h-8 w-8 rounded-full"
+                onError={(e) => e.target.src = 'default-profile.png'}
+              />
+            )}
+          </div>
           <div className="hidden md:flex items-center flex-row-reverse">
             {user ? (
               <>
@@ -156,18 +166,12 @@ const Home = () => {
               ))}
               <div className="flex flex-col mt-4">
                 {user ? (
-                  <>
-                    <img src={user.photoURL || 'default-profile.png'} alt="Profile" className="h-8 w-8 rounded-full mb-2" onError={(e) => e.target.src = 'default-profile.png'} />
-                    <span className="text-gray-700 mb-2 px-3 py-2 rounded-md text-sm font-medium">
-                      שלום, {user.displayName}
-                    </span>
-                    <button
-                      onClick={handleLogout}
-                      className="bg-red-500 text-white hover:bg-red-700 mb-2 px-3 py-2 rounded-md text-sm font-medium"
-                    >
-                      התנתקות
-                    </button>
-                  </>
+                  <button
+                    onClick={handleLogout}
+                    className="bg-red-500 text-white hover:bg-red-700 mb-2 px-3 py-2 rounded-md text-sm font-medium"
+                  >
+                    התנתקות
+                  </button>
                 ) : (
                   <>
                     <button
