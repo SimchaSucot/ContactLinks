@@ -17,6 +17,7 @@ import EmailLinkGenerator from './components/EmailLinkGenerator';
 import WhatsappLinkGenerator from './components/WhatsappLinkGenerator';
 import PhoneLinkGenerator from './components/PhoneLinkGenerator';
 import Welcome from './components/Welcome';
+import YouTubeDownloader from './components/YouTubeDownloader';
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
           <Route path="email-link" element={<EmailLinkGenerator />} />
           <Route path="whatsapp-link" element={<WhatsappLinkGenerator />} />
           <Route path="phone-link" element={<PhoneLinkGenerator />} />
+          <Route path="youTube-downloader" element={<YouTubeDownloader />} />
         </Route>
       </Routes>
     </Router>

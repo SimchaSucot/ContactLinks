@@ -74,6 +74,7 @@ const Home = () => {
               { text: 'קישור לאימייל', path: '/email-link' },
               { text: 'קישור לוואצאפ', path: '/whatsapp-link' },
               { text: 'קישור לטלפון', path: '/phone-link' },
+              { text: 'הורדת שירים מיוטיוב', path: '/youTube-downloader' },
             ].map((item, index) => (
               <Link
                 key={index}
