@@ -17,7 +17,7 @@ const YouTubeDownloader = () => {
     setIsDownloading(true);
 
     try {
-      const response = await axios.post('http://localhost:3000/download', { url });
+      const response = await axios.post('https://contactlinks.onrender.com/download', { url });
       const data = response.data;
 
       if (response.status !== 200) {
@@ -83,7 +83,7 @@ const YouTubeDownloader = () => {
                 *מספר צפיות:* {videoInfo.viewCount}
               </p>
               <a
-                href={`http://localhost:3000${videoInfo.videoPath}`}
+                href={`https://contactlinks.onrender.com${videoInfo.videoPath}`}
                 download
                 className="youtube-downloader-download-link bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500"
               >
