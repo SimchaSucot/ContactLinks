@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { FacebookShareButton, TwitterShareButton, WhatsappShareButton, FacebookIcon, TwitterIcon, WhatsappIcon } from 'react-share';
 import './YouTubeDownloader.css';
 
 const YouTubeDownloader = () => {
@@ -59,14 +58,30 @@ const YouTubeDownloader = () => {
     }
   };
 
-  const handleShareClick = () => {
-    if (navigator.share) {
-      navigator.share({
-        title: videoInfo.title,
-        url: `https://www.youtube.com/watch?v=${videoInfo.videoId}`,
-      }).catch((error) => console.error('Error sharing:', error));
-    } else {
-      alert('שיתוף לא נתמך בדפדפן זה.');
+  const handleShareClick = async () => {
+    try {
+      const response = await axios.get(`https://contactlinks.onrender.com${videoInfo.videoPath}`, {
+        responseType: 'blob',
+      });
+      const file = new File([response.data], videoInfo.title ? `${videoInfo.title}.mp4` : 'video.mp4', { type: 'video/mp4' });
+
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64data = reader.result.split(',')[1];
+        const blobUrl = `data:video/mp4;base64,${base64data}`;
+        
+        if (navigator.share) {
+          navigator.share({
+            title: videoInfo.title,
+            files: [file],
+          }).catch((error) => console.error('Error sharing:', error));
+        } else {
+          alert('שיתוף קבצים לא נתמך בדפדפן זה.');
+        }
+      };
+      reader.readAsDataURL(file);
+    } catch (error) {
+      setError('התרחשה שגיאה בהורדת הסרטון לשיתוף.');
     }
   };
 
@@ -132,17 +147,6 @@ const YouTubeDownloader = () => {
               >
                 שתף
               </button>
-            </div>
-            <div className="flex justify-center gap-4 mt-4">
-              <FacebookShareButton url={url} quote={videoInfo.title}>
-                <FacebookIcon size={32} round />
-              </FacebookShareButton>
-              <TwitterShareButton url={url} title={videoInfo.title}>
-                <TwitterIcon size={32} round />
-              </TwitterShareButton>
-              <WhatsappShareButton url={url} title={videoInfo.title}>
-                <WhatsappIcon size={32} round />
-              </WhatsappShareButton>
             </div>
           </div>
         )}
