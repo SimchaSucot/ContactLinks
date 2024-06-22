@@ -125,7 +125,7 @@ body, html {
     text-align: center;
   }
   
-  .youtube-downloader-download-link {
+  .youtube-downloader-download-link, .youtube-downloader-view-link {
     background-color: #10b981;
     color: #ffffff;
     padding: 0.75rem 1.5rem;
@@ -134,7 +134,7 @@ body, html {
     display: inline-block;
   }
   
-  .youtube-downloader-download-link:hover {
+  .youtube-downloader-download-link:hover, .youtube-downloader-view-link:hover {
     background-color: #059669;
   }
   

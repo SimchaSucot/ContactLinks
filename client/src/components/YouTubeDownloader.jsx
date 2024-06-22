@@ -40,6 +40,24 @@ const YouTubeDownloader = () => {
     }
   };
 
+  const handleDownloadClick = async () => {
+    try {
+      const response = await axios.get(`https://contactlinks.onrender.com${videoInfo.videoPath}`, {
+        responseType: 'blob',
+      });
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', videoInfo.title ? `${videoInfo.title}.mp4` : 'video.mp4');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      setError('התרחשה שגיאה בהורדת הסרטון.');
+    }
+  };
+
   return (
     <div className="youtube-downloader-container mx-auto p-8 rounded-lg shadow-lg">
       <div className="youtube-downloader-content w-full md:w-1/2 text-right animate-fade-in">
@@ -81,13 +99,22 @@ const YouTubeDownloader = () => {
             <p className="youtube-downloader-view-count text-gray-800 break-words mb-4">
               *מספר צפיות:* {videoInfo.viewCount}
             </p>
-            <a
-              href={`https://contactlinks.onrender.com${videoInfo.videoPath}`}
-              download
-              className="youtube-downloader-download-link bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500"
-            >
-              הורד למחשב
-            </a>
+            <div className="flex justify-center gap-4">
+              <a
+                href={`https://contactlinks.onrender.com${videoInfo.videoPath}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="youtube-downloader-view-link bg-yellow-500 text-white px-6 py-3 rounded-lg hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+              >
+                פתח את הסרטון
+              </a>
+              <button
+                onClick={handleDownloadClick}
+                className="youtube-downloader-download-link bg-green-500 text-white px-6 py-3 rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-500"
+              >
+                הורד לזיכרון המחשב
+              </button>
+            </div>
           </div>
         )}
       </div>
