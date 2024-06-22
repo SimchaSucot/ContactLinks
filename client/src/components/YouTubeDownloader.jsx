@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { FacebookShareButton, TwitterShareButton, WhatsappShareButton, FacebookIcon, TwitterIcon, WhatsappIcon } from 'react-share';
 import './YouTubeDownloader.css';
 
 const YouTubeDownloader = () => {
@@ -55,6 +56,17 @@ const YouTubeDownloader = () => {
       window.URL.revokeObjectURL(url);
     } catch (error) {
       setError('התרחשה שגיאה בהורדת הסרטון.');
+    }
+  };
+
+  const handleShareClick = () => {
+    if (navigator.share) {
+      navigator.share({
+        title: videoInfo.title,
+        url: `https://www.youtube.com/watch?v=${videoInfo.videoId}`,
+      }).catch((error) => console.error('Error sharing:', error));
+    } else {
+      alert('שיתוף לא נתמך בדפדפן זה.');
     }
   };
 
@@ -114,6 +126,23 @@ const YouTubeDownloader = () => {
               >
                 הורד לזיכרון המחשב
               </button>
+              <button
+                onClick={handleShareClick}
+                className="youtube-downloader-share-link bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                שתף
+              </button>
+            </div>
+            <div className="flex justify-center gap-4 mt-4">
+              <FacebookShareButton url={url} quote={videoInfo.title}>
+                <FacebookIcon size={32} round />
+              </FacebookShareButton>
+              <TwitterShareButton url={url} title={videoInfo.title}>
+                <TwitterIcon size={32} round />
+              </TwitterShareButton>
+              <WhatsappShareButton url={url} title={videoInfo.title}>
+                <WhatsappIcon size={32} round />
+              </WhatsappShareButton>
             </div>
           </div>
         )}
