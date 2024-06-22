@@ -1,0 +1,189 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+  }
+  
+  .youtube-downloader-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  .youtube-downloader-content, .youtube-downloader-instructions {
+    background-color: #fff;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%; /* ברירת מחדל - תופס 100% רוחב במסכים קטנים */
+  }
+  
+  @media (min-width: 768px) {
+    .youtube-downloader-content{
+      gap: 2rem;
+      padding: 2rem;
+    }
+    .youtube-downloader-content,
+    .youtube-downloader-instructions {
+      padding: 2rem;
+      width: 45%; /* במסכים גדולים יותר, תופס 45% רוחב */
+    }
+  }
+  
+  .youtube-downloader-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #1a202c;
+    margin-bottom: 1rem;
+  }
+  
+  .youtube-downloader-instructions-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #0a3d62;
+    margin-bottom: 1rem;
+  }
+  
+  .youtube-downloader-input-group, .youtube-downloader-input, .youtube-downloader-button, .youtube-downloader-instructions-text, .youtube-downloader-instructions-list {
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+  }
+  
+  .youtube-downloader-input-group {
+    animation-delay: 0.5s;
+  }
+  
+  .youtube-downloader-input {
+    animation-delay: 1s;
+  }
+  
+  .youtube-downloader-button {
+    animation-delay: 1.5s;
+  }
+  
+  .youtube-downloader-instructions-title {
+    animation-delay: 0.5s;
+  }
+  
+  .youtube-downloader-instructions-text, .youtube-downloader-instructions-list {
+    animation-delay: 0.75s;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeInFast {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate-fade-in-fast {
+    animation: fadeInFast 0.75s forwards;
+  }
+  
+  .typing-animation {
+    animation: typing 2s steps(30, end) forwards, none;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 0.15em solid #000;
+  }
+  
+  @keyframes typing {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+  
+  .youtube-downloader-error {
+    color: #ef4444;
+    margin-top: 0.5rem;
+  }
+  
+  .youtube-downloader-info {
+    margin-top: 1.5rem;
+    text-align: center;
+  }
+  
+  .youtube-downloader-download-link {
+    background-color: #10b981;
+    color: #ffffff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s;
+    display: inline-block;
+  }
+  
+  .youtube-downloader-download-link:hover {
+    background-color: #059669;
+  }
+  
+  .youtube-downloader-label {
+    display: block;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 0.5rem;
+  }
+  
+  .youtube-downloader-input {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    text-align: right;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  
+  .youtube-downloader-input:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.2);
+  }
+  
+  .youtube-downloader-button {
+    background-color: #2563eb;
+    color: #ffffff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s;
+    cursor: pointer;
+    display: inline-block;
+  }
+  
+  .youtube-downloader-button:hover {
+    background-color: #1d4ed8;
+  }
+  
+  .youtube-downloader-button:disabled {
+    background-color: #60a5fa;
+    cursor: not-allowed;
+  }
+  
+  .youtube-downloader-instructions-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 0.5rem;
+    text-align: right;
+    animation: fadeInFast 0.5s;
+  }
+  
