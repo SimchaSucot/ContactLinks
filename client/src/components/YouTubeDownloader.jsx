@@ -100,7 +100,7 @@ const YouTubeDownloader = () => {
             value={url}
             onChange={(e) => setUrl(e.target.value)}
             className="youtube-downloader-input w-full px-4 py-2 border border-gray-300 rounded-lg text-right focus:outline-none focus:ring-2 focus:ring-blue-500"
-            placeholder="לדוגמה: https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+            placeholder="https://www.youtube.com/watch?v=dQw4w9WgXcQ :לדוגמה"
           />
           {error && (
             <p className="youtube-downloader-error text-red-500 mt-2">{error}</p>
@@ -116,15 +116,15 @@ const YouTubeDownloader = () => {
           </button>
         </div>
         {videoInfo && (
-          <div className="youtube-downloader-info mt-6 text-center">
-            <p className="youtube-downloader-title text-gray-800 break-words mb-4">
-              *כותרת הסרטון:* {videoInfo.title}
+          <div className="youtube-downloader-info mt-6 text-center p-4 border border-gray-200 rounded-lg shadow-md">
+            <p className="youtube-downloader-title text-2xl font-bold text-gray-800 mb-4">
+              {videoInfo.title}
             </p>
-            <p className="youtube-downloader-upload-date text-gray-800 break-words mb-4">
-              *תאריך יציאת הסרטון:* {videoInfo.uploadDate}
+            <p className="youtube-downloader-upload-date text-lg text-gray-600 mb-2">
+              <strong>תאריך יציאת הסרטון:</strong> {videoInfo.uploadDate}
             </p>
-            <p className="youtube-downloader-view-count text-gray-800 break-words mb-4">
-              *מספר צפיות:* {videoInfo.viewCount}
+            <p className="youtube-downloader-view-count text-lg text-gray-600 mb-4">
+              <strong>מספר צפיות:</strong> {videoInfo.viewCount}
             </p>
             <div className="flex justify-center gap-4">
               <a
@@ -155,27 +155,27 @@ const YouTubeDownloader = () => {
         <h3 className="youtube-downloader-instructions-title text-lg font-bold mb-4 text-dark-blue">
           איך להשתמש במחולל הורדת סרטוני יוטיוב
         </h3>
-        <p className="youtube-downloader-instructions-text mb-2 animate-fade-in-fast">
+        <p className="youtube-downloader-instructions-text mb-2">
           <strong>היי! רוצים להוריד סרטון יוטיוב בקלות?</strong> הנה מדריך פשוט איך להשתמש במחולל ההורדה שלנו
         </p>
-        <p className="youtube-downloader-instructions-text mb-2 animate-fade-in-fast">
+        <p className="youtube-downloader-instructions-text mb-2">
           <strong>הזינו את קישור הסרטון</strong>
         </p>
-        <ul className="youtube-downloader-instructions-list mb-2 text-right animate-fade-in-fast">
+        <ul className="youtube-downloader-instructions-list mb-2 text-right">
           <li>בשדה הקישור, רשמו את קישור הסרטון מיוטיוב</li>
           <li>לדוגמה: https://www.youtube.com/watch?v=dQw4w9WgXcQ</li>
         </ul>
-        <p className="youtube-downloader-instructions-text mb-2 animate-fade-in-fast">
+        <p className="youtube-downloader-instructions-text mb-2">
           <strong>לחצו על כפתור ההורדה</strong>
         </p>
-        <ul className="youtube-downloader-instructions-list mb-2 text-right animate-fade-in-fast">
+        <ul className="youtube-downloader-instructions-list mb-2 text-right">
           <li>לחצו על הכפתור "הורד סרטון"</li>
           <li>המערכת תתחיל להוריד את הסרטון ותקבלו מידע על הסרטון שהורדתם</li>
         </ul>
-        <p className="youtube-downloader-instructions-text mb-2 animate-fade-in-fast">
+        <p className="youtube-downloader-instructions-text mb-2">
           <strong>הורידו את הסרטון למחשב</strong>
         </p>
-        <ul className="youtube-downloader-instructions-list mb-2 text-right animate-fade-in-fast">
+        <ul className="youtube-downloader-instructions-list mb-2 text-right">
           <li>לאחר ההורדה, תוכלו להוריד את הסרטון למחשב על ידי לחיצה על כפתור "הורד למחשב"</li>
         </ul>
       </div>
