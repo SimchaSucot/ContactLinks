@@ -1,23 +1,26 @@
-import React, { useState } from 'react';
-import axios from 'axios';
-import './YouTubeDownloader.css';
+import React, { useState } from "react";
+import axios from "axios";
+import "./YouTubeDownloader.css";
 
 const YouTubeDownloader = () => {
-  const [url, setUrl] = useState('');
-  const [error, setError] = useState('');
+  const [url, setUrl] = useState("");
+  const [error, setError] = useState("");
   const [videoInfo, setVideoInfo] = useState(null);
   const [isDownloading, setIsDownloading] = useState(false);
 
   const handleDownload = async () => {
     if (!url) {
-      setError('אנא הזן קישור.');
+      setError("אנא הזן קישור.");
       return;
     }
-    setError('');
+    setError("");
     setIsDownloading(true);
 
     try {
-      const response = await axios.post('https://contactlinks.onrender.com/download', { url });
+      const response = await axios.post(
+        "https://contactlinks.onrender.com/download",
+        { url }
+      );
       const data = response.data;
 
       if (response.status !== 200) {
@@ -35,53 +38,68 @@ const YouTubeDownloader = () => {
 
       setIsDownloading(false);
     } catch (error) {
-      setError('התרחשה שגיאה בעיבוד בקשתך. אנא נסה שוב מאוחר יותר.');
+      setError("התרחשה שגיאה בעיבוד בקשתך. אנא נסה שוב מאוחר יותר.");
       setIsDownloading(false);
     }
   };
 
   const handleDownloadClick = async () => {
     try {
-      const response = await axios.get(`https://contactlinks.onrender.com${videoInfo.videoPath}`, {
-        responseType: 'blob',
-      });
+      const response = await axios.get(
+        `https://contactlinks.onrender.com${videoInfo.videoPath}`,
+        {
+          responseType: "blob",
+        }
+      );
       const url = window.URL.createObjectURL(new Blob([response.data]));
-      const link = document.createElement('a');
+      const link = document.createElement("a");
       link.href = url;
-      link.setAttribute('download', videoInfo.title ? `${videoInfo.title}.mp4` : 'video.mp4');
+      link.setAttribute(
+        "download",
+        videoInfo.title ? `${videoInfo.title}.mp4` : "video.mp4"
+      );
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
     } catch (error) {
-      setError('התרחשה שגיאה בהורדת הסרטון.');
+      setError("התרחשה שגיאה בהורדת הסרטון.");
     }
   };
 
   const handleShareClick = async () => {
     try {
-      const response = await axios.get(`https://contactlinks.onrender.com${videoInfo.videoPath}`, {
-        responseType: 'blob',
-      });
-      const file = new File([response.data], videoInfo.title ? `${videoInfo.title}.mp4` : 'video.mp4', { type: 'video/mp4' });
+      const response = await axios.get(
+        `https://contactlinks.onrender.com${videoInfo.videoPath}`,
+        {
+          responseType: "blob",
+        }
+      );
+      const file = new File(
+        [response.data],
+        videoInfo.title ? `${videoInfo.title}.mp4` : "video.mp4",
+        { type: "video/mp4" }
+      );
 
       const reader = new FileReader();
       reader.onloadend = () => {
-        const base64data = reader.result.split(',')[1];
+        const base64data = reader.result.split(",")[1];
         const blobUrl = `data:video/mp4;base64,${base64data}`;
-        
+
         if (navigator.share) {
-          navigator.share({
-            title: videoInfo.title,
-            files: [file],
-          }).catch((error) => console.error('Error sharing:', error));
+          navigator
+            .share({
+              title: videoInfo.title,
+              files: [file],
+            })
+            .catch((error) => console.error("Error sharing:", error));
         } else {
-          alert('שיתוף קבצים לא נתמך בדפדפן זה.');
+          alert("שיתוף קבצים לא נתמך בדפדפן זה.");
         }
       };
       reader.readAsDataURL(file);
     } catch (error) {
-      setError('התרחשה שגיאה בהורדת הסרטון לשיתוף.');
+      setError("התרחשה שגיאה בהורדת הסרטון לשיתוף.");
     }
   };
 
@@ -103,7 +121,9 @@ const YouTubeDownloader = () => {
             placeholder="https://www.youtube.com/watch?v=dQw4w9WgXcQ :לדוגמה"
           />
           {error && (
-            <p className="youtube-downloader-error text-red-500 mt-2">{error}</p>
+            <p className="youtube-downloader-error text-red-500 mt-2">
+              {error}
+            </p>
           )}
         </div>
         <div className="flex justify-center">
@@ -112,7 +132,7 @@ const YouTubeDownloader = () => {
             className="youtube-downloader-button bg-blue-500 text-white px-6 py-3 rounded-lg mb-6 hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
             disabled={isDownloading}
           >
-            {isDownloading ? 'מוריד...' : 'הורד סרטון'}
+            {isDownloading ? "...מוריד" : "הורד סרטון"}
           </button>
         </div>
         {videoInfo && (
@@ -124,9 +144,15 @@ const YouTubeDownloader = () => {
               <strong>תאריך יציאת הסרטון:</strong> {videoInfo.uploadDate}
             </p>
             <p className="youtube-downloader-view-count text-lg text-gray-600 mb-4">
-              <strong>מספר צפיות:</strong> {videoInfo.viewCount}
+              <strong>מספר צפיות:</strong> {Number(videoInfo.viewCount).toLocaleString()}
             </p>
             <div className="flex justify-center gap-4">
+              <button
+                onClick={handleShareClick}
+                className="youtube-downloader-share-link bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                שתף
+              </button>
               <a
                 href={`https://contactlinks.onrender.com${videoInfo.videoPath}`}
                 target="_blank"
@@ -141,12 +167,6 @@ const YouTubeDownloader = () => {
               >
                 הורד לזיכרון המחשב
               </button>
-              <button
-                onClick={handleShareClick}
-                className="youtube-downloader-share-link bg-blue-500 text-white px-6 py-3 rounded-lg hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              >
-                שתף
-              </button>
             </div>
           </div>
         )}
@@ -156,7 +176,8 @@ const YouTubeDownloader = () => {
           איך להשתמש במחולל הורדת סרטוני יוטיוב
         </h3>
         <p className="youtube-downloader-instructions-text mb-2">
-          <strong>היי! רוצים להוריד סרטון יוטיוב בקלות?</strong> הנה מדריך פשוט איך להשתמש במחולל ההורדה שלנו
+          <strong>היי! רוצים להוריד סרטון יוטיוב בקלות?</strong> הנה מדריך פשוט
+          איך להשתמש במחולל ההורדה שלנו
         </p>
         <p className="youtube-downloader-instructions-text mb-2">
           <strong>הזינו את קישור הסרטון</strong>
@@ -176,7 +197,10 @@ const YouTubeDownloader = () => {
           <strong>הורידו את הסרטון למחשב</strong>
         </p>
         <ul className="youtube-downloader-instructions-list mb-2 text-right">
-          <li>לאחר ההורדה, תוכלו להוריד את הסרטון למחשב על ידי לחיצה על כפתור "הורד למחשב"</li>
+          <li>
+            לאחר ההורדה, תוכלו להוריד את הסרטון למחשב על ידי לחיצה על כפתור
+            "הורד למחשב"
+          </li>
         </ul>
       </div>
     </div>
