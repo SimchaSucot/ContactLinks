@@ -18,7 +18,8 @@ const YouTubeDownloader = () => {
 
     try {
       const response = await axios.post(
-        "https://contactlinks.onrender.com/download",
+        // "https://contactlinks.onrender.com/download",
+        "http://localhost:3000/download",
         { url }
       );
       const data = response.data;
@@ -46,7 +47,8 @@ const YouTubeDownloader = () => {
   const handleDownloadClick = async () => {
     try {
       const response = await axios.get(
-        `https://contactlinks.onrender.com${videoInfo.videoPath}`,
+        // `https://contactlinks.onrender.com${videoInfo.videoPath}`,
+        `http://localhost:3000${videoInfo.videoPath}`,
         {
           responseType: "blob",
         }
