@@ -1,5 +1,3 @@
-// serviceWorkerRegistration.js
-
 const isLocalhost = Boolean(
     window.location.hostname === 'localhost' ||
     window.location.hostname === '[::1]' ||
@@ -10,14 +8,10 @@ const isLocalhost = Boolean(
   
   export function register(config) {
     if ('serviceWorker' in navigator) {
-      const publicUrl = new URL(process.env.PUBLIC_URL, window.location.href);
-      if (publicUrl.origin !== window.location.origin) {
-        return;
-      }
+      // הסרת השימוש ב-PUBLIC_URL ובחירת נתיב מוחלט
+      const swUrl = '/service-worker.js';
   
       window.addEventListener('load', () => {
-        const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;
-  
         if (isLocalhost) {
           checkValidServiceWorker(swUrl, config);
           navigator.serviceWorker.ready.then(() => {
@@ -101,4 +95,4 @@ const isLocalhost = Boolean(
         });
     }
   }
-      
+  
